@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "1116e917-8a4a-4c05-a925-6ba3bb7b15c4",
+		"name": "PySis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25235186"
+	},
+	"item": [
+		{
+			"name": "Conversation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"telegram_id\": 12345,\r\n  \"user_name\": \"Estudiante\",\r\n  \"text\": \"Hola, qué vamos a aprender hoy?\",\r\n  \"chat_history\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/conversation/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"conversation",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8000/conversation/' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"telegram_id\": 12345,\r\n  \"user_name\": \"Estudiante\",\r\n  \"text\": \"Hola, qué vamos a aprender hoy?\",\r\n  \"chat_history\": []\r\n}'"
+			},
+			"response": []
+		}
+	]
+}

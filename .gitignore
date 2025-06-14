@@ -1,0 +1,6 @@
+__pycache__/
+core_service/app/static_data/vectorstores/
+core_service/app/pysis.db
+
+.env
+/.env

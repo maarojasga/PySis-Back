@@ -1,0 +1,25 @@
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./pysis.db")
+
+engine = create_engine(
+    DATABASE_URL, connect_args={"check_same_thread": False}
+)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
+
+def init_db():
+    from app.models import user_progress
+    print("Creando tablas de la base de datos (si no existen)...")
+    Base.metadata.create_all(bind=engine)
+    print("Tablas de la base de datos verificadas/creadas.")
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
