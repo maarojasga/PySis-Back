@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-VECTORSTORE_BASE_PATH = "app/static_data/vectorstores/"
+VECTORSTORE_BASE_PATH = "/vectorstores/"
 
 def get_llm_local(model_name="gemini-2.0-flash-001", temperature=0.3, max_tokens=350):
     """

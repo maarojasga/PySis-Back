@@ -38,7 +38,7 @@ def main():
     Script principal para procesar los PDFs y crear los vectorstores diarios.
     """
     pdf_source_directory = "course_content/"
-    vectorstore_base_path = "../PySis-Back/"
+    vectorstore_base_path = "vectorstores/"
 
     if not os.path.exists(pdf_source_directory):
         print(f"Error: El directorio fuente de PDFs '{pdf_source_directory}' no existe. Por favor, créalo y añade tus PDFs.")
