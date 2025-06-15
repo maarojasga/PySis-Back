@@ -1,0 +1,3 @@
+bot.kinoia.com {
+    reverse_proxy channel_service:8003
+}
