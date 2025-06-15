@@ -10,7 +10,7 @@ services:
     ports:
       - "8002:8002"
     environment:
-      - DATABASE_URL=sqlite:///./app/pysis.db
+      - DATABASE_URL=${DATABASE_URL}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     volumes:
       - ./core_service:/app
@@ -39,7 +39,7 @@ services:
     ports:
       - "8004:8004"
     environment:
-      - DATABASE_URL=sqlite:////data/pysis.db
+      - DATABASE_URL=${DATABASE_URL}
     volumes:
       - ./statistics_service:/app
       - ./core_service/app:/data:ro
@@ -48,3 +48,5 @@ services:
     networks:
       - app_network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8004 --reload
+
+

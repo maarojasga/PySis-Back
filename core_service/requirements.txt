@@ -8,3 +8,4 @@ langchain-google-genai
 tiktoken
 PyMuPDF
 langchain_community
+psycopg2-binary
