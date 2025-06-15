@@ -11,7 +11,7 @@ router = APIRouter()
 
 RAG_CONVERSATION_URL = os.getenv("CORE_SERVICE_URL", "http://core_service:8002") + "/conversation/query"
 
-@router.post("/webhook/")
+@router.post("/webhook")
 async def telegram_webhook(request: Request):
     print("Received headers:", request.headers)
     try:
