@@ -5,6 +5,21 @@ networks:
     driver: bridge
 
 services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+    networks:
+      - app_network
+    depends_on:
+      - channel_service
+
   core_service:
     build: ./core_service
     ports:
@@ -17,11 +32,10 @@ services:
     networks:
       - app_network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
+    restart: unless-stopped
 
   channel_service:
     build: ./channel_service
-    ports:
-      - "8003:8003"
     environment:
       - CORE_SERVICE_URL=http://core_service:8002
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
@@ -33,6 +47,7 @@ services:
     networks:
       - app_network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8003 --reload
+    restart: unless-stopped
 
   statistics_service:
     build: ./statistics_service
@@ -48,5 +63,7 @@ services:
     networks:
       - app_network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8004 --reload
+    restart: unless-stopped
 
-
+volumes:
+  caddy_data:
