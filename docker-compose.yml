@@ -27,8 +27,6 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-    volumes:
-      - ./core_service:/app
     networks:
       - app_network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
