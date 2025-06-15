@@ -18,3 +18,33 @@ services:
       - app_network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
 
+  channel_service:
+    build: ./channel_service
+    ports:
+      - "8003:8003"
+    environment:
+      - CORE_SERVICE_URL=http://core_service:8002
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - ORG_ID=1
+    depends_on:
+      - core_service
+    volumes:
+      - ./channel_service:/app
+    networks:
+      - app_network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8003 --reload
+
+  statistics_service:
+    build: ./statistics_service
+    ports:
+      - "8004:8004"
+    environment:
+      - DATABASE_URL=sqlite:////data/pysis.db
+    volumes:
+      - ./statistics_service:/app
+      - ./core_service/app:/data:ro
+    depends_on:
+      - core_service
+    networks:
+      - app_network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8004 --reload
